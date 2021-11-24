@@ -34,7 +34,7 @@ test("status of ship on hit", () => {
   const tmpShip = ShipFactory(testLength);
   // fn to test
   tmpShip.hit(4);
-  expect(tmpShip.status).toMatchObject([0, 0, 0, 1, 0]);
+  expect(tmpShip.status).toMatchObject([0, 0, 0, 0, 1]);
 });
 
 test("is ship sunk : false", () => {
@@ -49,10 +49,10 @@ test("is ship sunk : true", () => {
   const testLength = 5;
   const tmpShip = ShipFactory(testLength);
   // fn to test
+  tmpShip.hit(0);
   tmpShip.hit(1);
   tmpShip.hit(2);
   tmpShip.hit(3);
   tmpShip.hit(4);
-  tmpShip.hit(5);
   expect(tmpShip.isSunk).toBe(true);
 });

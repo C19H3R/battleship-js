@@ -2,8 +2,8 @@ const ShipFactory = (shipSize) => {
   const status = Array(shipSize).fill(0);
 
   const hit = (hitPos) => {
-    if (hitPos > 0 && hitPos <= status.length) {
-      status[hitPos - 1] = 1;
+    if (hitPos >= 0 && hitPos < status.length) {
+      status[hitPos] = 1;
     }
   };
   return {
