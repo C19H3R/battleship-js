@@ -1,3 +1,5 @@
+import "./style.css";
+
 import GameBoardFactory from "./factories/GameBoardFactory/GameBoardFactory";
 import { HORIZONTAL } from "./factories/GameBoardFactory/GameBoardFactoryUtil";
 import ShipFactory from "./factories/ShipFactory/ShipFactory";

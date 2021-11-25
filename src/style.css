@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "Press Start 2P";
+  src: url(./assets/fonts/Plaguard-font.otf);
+}
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(153, 153, 153);
+}
+#project-title {
+  font-size: 48px;
+  margin: 20px 0px;
+  font-weight: bolder;
+  font-family: "Press Start 2P";
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  background-color: rgb(64, 77, 41);
+}
+
+#play-page {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+#play-page .divider {
+  width: 2px;
+  height: 500px;
+  background-color: rgb(141, 141, 141);
+}
+#play-page .board-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#play-page .board-container .board {
+  width: 400px;
+  height: 400px;
+  background-color: rgb(255, 255, 255);
+}
+
+#play-page .board-container .stats {
+}
