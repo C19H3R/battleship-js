@@ -40,7 +40,15 @@ const GameBoardFactory = () => {
     }
     return true;
   };
+  const getHitCellNumber = ({ start, orientation, row, col }) => {
+    if (orientation === HORIZONTAL) {
+      return col - start.col;
+    }
 
+    return row - start.row;
+  };
+  const getShipDataWithId = (id) =>
+    shipsManager.find((item) => item.shipId === id);
   const placeShip = ({ row, col, orientation }, shipObj = ShipFactory(4)) => {
     const currShip = shipObj;
     const currLength = currShip.length;
@@ -52,31 +60,38 @@ const GameBoardFactory = () => {
       end = { row, col: col + currLength - 1 };
     }
     if (isGivenRangeValid({ start, end })) {
+      const shipId = shipsManager.length + 1;
       shipsManager.push({
         currShip,
         start,
         end,
-        shipId: shipsManager.length,
+        shipId,
         orientation,
       });
       if (orientation === VERTICAL) {
         const currCol = start.col;
         for (let i = start.row; i <= end.row; i += 1) {
-          gridState[i][currCol] = { type: FILLED_CELL, isHit: false };
+          gridState[i][currCol] = { type: FILLED_CELL, isHit: false, shipId };
         }
       } else if (orientation === HORIZONTAL) {
         const currRow = start.row;
         for (let i = start.col; i <= end.col; i += 1) {
-          gridState[currRow][i] = { type: FILLED_CELL, isHit: false };
+          gridState[currRow][i] = { type: FILLED_CELL, isHit: false, shipId };
         }
       }
     }
   };
 
   const receiveAttack = ({ row, col }) => {
-    const cellUnderAttack = Object.create(gridState[row][col]);
+    const cellUnderAttack = { ...gridState[row][col] };
     cellUnderAttack.isHit = true;
     gridState[row][col] = cellUnderAttack;
+
+    if (cellUnderAttack.type === FILLED_CELL) {
+      const currShipId = cellUnderAttack.shipId;
+      const { currShip, start, orientation } = getShipDataWithId(currShipId);
+      currShip.hit(getHitCellNumber({ start, orientation, row, col }));
+    }
   };
 
   return {
@@ -86,10 +101,22 @@ const GameBoardFactory = () => {
       return gridState;
     },
     get livesLeft() {
-      return 0;
+      let livesLeft = 0;
+      shipsManager.forEach(({ currShip }) => {
+        if (!currShip.isSunk) {
+          livesLeft += 1;
+        }
+      });
+      return livesLeft;
     },
     get gameOver() {
-      return false;
+      let livesLeft = 0;
+      shipsManager.forEach(({ currShip }) => {
+        if (!currShip.isSunk) {
+          livesLeft += 1;
+        }
+      });
+      return livesLeft === 0;
     },
   };
 };

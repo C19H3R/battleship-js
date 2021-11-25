@@ -143,10 +143,10 @@ test("ship placed at given coordinates Valid :  horizontal", () => {
 
   expect(tmpGameBoard.gridStatus).toMatchObject([
     [
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -273,7 +273,7 @@ test("ship placed at given coordinates Valid :  vertical", () => {
 
   expect(tmpGameBoard.gridStatus).toMatchObject([
     [
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -285,7 +285,7 @@ test("ship placed at given coordinates Valid :  vertical", () => {
       { type: EMPTY_CELL, isHit: false },
     ],
     [
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -297,7 +297,7 @@ test("ship placed at given coordinates Valid :  vertical", () => {
       { type: EMPTY_CELL, isHit: false },
     ],
     [
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -309,7 +309,7 @@ test("ship placed at given coordinates Valid :  vertical", () => {
       { type: EMPTY_CELL, isHit: false },
     ],
     [
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -664,10 +664,10 @@ test("ships dont overlap", () => {
   tmpGameBoard.placeShip({ row: 0, col: 0, orientation: VERTICAL }, tmpShip2);
   expect(tmpGameBoard.gridStatus).toMatchObject([
     [
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -791,16 +791,16 @@ test("receive Attack on ship", () => {
 
   const tmpShip = ShipFactory(4);
 
-  tmpGameBoard.placeShip({ row: 0, col: 0, orientatio: HORIZONTAL }, tmpShip);
+  tmpGameBoard.placeShip({ row: 0, col: 0, orientation: HORIZONTAL }, tmpShip);
 
   tmpGameBoard.receiveAttack({ row: 0, col: 0 });
 
   expect(tmpGameBoard.gridStatus).toMatchObject([
     [
-      { type: FILLED_CELL, isHit: true },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
-      { type: FILLED_CELL, isHit: false },
+      { type: FILLED_CELL, isHit: true, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
+      { type: FILLED_CELL, isHit: false, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
@@ -1053,21 +1053,21 @@ test("fullShip Sunk : {check lives system}", () => {
 
   const tmpShip = ShipFactory(4);
 
-  tmpGameBoard.placeShip({ row: 0, col: 0, orientatio: HORIZONTAL }, tmpShip);
+  tmpGameBoard.placeShip({ row: 0, col: 0, orientation: HORIZONTAL }, tmpShip);
 
   expect(tmpGameBoard.livesLeft).toBe(1);
 
-  tmpGameBoard.receiveAttack({ x: 0, y: 0 });
-  tmpGameBoard.receiveAttack({ x: 1, y: 0 });
-  tmpGameBoard.receiveAttack({ x: 2, y: 0 });
-  tmpGameBoard.receiveAttack({ x: 3, y: 0 });
+  tmpGameBoard.receiveAttack({ row: 0, col: 0 });
+  tmpGameBoard.receiveAttack({ row: 0, col: 1 });
+  tmpGameBoard.receiveAttack({ row: 0, col: 2 });
+  tmpGameBoard.receiveAttack({ row: 0, col: 3 });
 
   expect(tmpGameBoard.gridStatus).toMatchObject([
     [
-      { type: FILLED_CELL, isHit: true },
-      { type: FILLED_CELL, isHit: true },
-      { type: FILLED_CELL, isHit: true },
-      { type: FILLED_CELL, isHit: true },
+      { type: FILLED_CELL, isHit: true, shipId: 1 },
+      { type: FILLED_CELL, isHit: true, shipId: 1 },
+      { type: FILLED_CELL, isHit: true, shipId: 1 },
+      { type: FILLED_CELL, isHit: true, shipId: 1 },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
       { type: EMPTY_CELL, isHit: false },
