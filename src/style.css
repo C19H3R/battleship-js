@@ -5,26 +5,26 @@
 body {
   margin: 0;
   height: 100vh;
+  font-family: "Press Start 2P";
+  background-color: #00100b;
+  color: #ffffff;
 }
 
 header {
   display: flex;
   justify-content: center;
-  background-color: rgb(153, 153, 153);
 }
 #project-title {
-  font-size: 48px;
-  margin: 20px 0px;
+  font-size: 72px;
+  margin-top: 50px;
   font-weight: bolder;
-  font-family: "Press Start 2P";
 }
 
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80%;
-  background-color: rgb(64, 77, 41);
+  height: 70%;
 }
 
 #play-page {
@@ -35,7 +35,7 @@ main {
 }
 #play-page .divider {
   width: 2px;
-  height: 500px;
+  height: 600px;
   background-color: rgb(141, 141, 141);
 }
 #play-page .board-container {
@@ -46,8 +46,44 @@ main {
 #play-page .board-container .board {
   width: 400px;
   height: 400px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(238, 221, 146);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
 }
 
 #play-page .board-container .stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#play-page .board-container .stats .lives-container {
+  display: flex;
+  gap: 10px;
+  background-color: wheat;
+  padding: 10px;
+  border-radius: 50px;
+}
+#play-page .board-container .stats .lives-container img {
+  width: 48px;
+  height: 48px;
+}
+#play-page .board-container .stats .lives-container img.live-over {
+  filter: grayscale(100%);
+}
+
+footer {
+  color: #e1e6e4;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  margin: 48px 0px;
+}
+
+footer a {
+  color: aqua;
 }
