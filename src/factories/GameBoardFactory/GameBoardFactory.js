@@ -7,7 +7,7 @@ import {
 } from "./GameBoardFactoryUtil";
 
 const GameBoardFactory = () => {
-  const gridState = [...Array(10)].map(() =>
+  let gridState = [...Array(10)].map(() =>
     Array(10).fill({ type: EMPTY_CELL, isHit: false })
   );
   const shipsManager = [];
@@ -93,8 +93,13 @@ const GameBoardFactory = () => {
       currShip.hit(getHitCellNumber({ start, orientation, row, col }));
     }
   };
-
+  const resetBoard = () => {
+    gridState = [...Array(10)].map(() =>
+      Array(10).fill({ type: EMPTY_CELL, isHit: false })
+    );
+  };
   return {
+    resetBoard,
     placeShip,
     receiveAttack,
     get gridStatus() {
