@@ -4,6 +4,7 @@ import LivesBar from "../components/LivesBar";
 import BattleShipGame from "../../GameManager/GameManager";
 
 const PlayPage = () => {
+  const mainDiv = document.createElement("main");
   const playPageDiv = document.createElement("div");
   playPageDiv.id = "play-page";
 
@@ -32,8 +33,8 @@ const PlayPage = () => {
   playPageDiv.appendChild(getBoardContainer(BOARD_MODE.PLAYER));
   playPageDiv.appendChild(divider);
   playPageDiv.appendChild(getBoardContainer(BOARD_MODE.ENEMY));
-
-  return playPageDiv;
+  mainDiv.appendChild(playPageDiv);
+  return mainDiv;
 };
 
 export default PlayPage;
